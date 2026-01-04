@@ -1,0 +1,28 @@
+# == CORE ==
+python>=3.9
+
+# == DATA HANDLING ==
+pandas>=2.0.0
+numpy>=1.24.0
+ccxt>=4.0.0  # pour Binance/Hyperliquid
+
+# == TECHNICAL ANALYSIS ==
+ta>=0.10.0  # indicateurs techniques légers
+
+# == MACHINE LEARNING ==
+scikit-learn>=1.3.0
+torch>=2.0.0  # PyTorch (optionnel au début)
+gymnasium>=0.29.0  # environnement RL
+
+# == VISUALIZATION ==
+plotly>=5.17.0
+matplotlib>=3.7.0
+
+# == UTILITIES ==
+python-dotenv>=1.0.0
+loguru>=0.7.0
+tqdm>=4.65.0
+pyyaml>=6.0
+
+# == BACKTESTING (léger) ==
+backtesting.py>=0.3.3  # backtesting simple
