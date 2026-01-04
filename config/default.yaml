@@ -1,0 +1,28 @@
+```yaml
+project:
+  name: "orca-trading"
+  version: "0.1.0"
+  author: "Orca Team"
+
+data:
+  exchange: "binance"
+  symbols:
+    - "BTC/USDT"
+    - "ETH/USDT"
+  timeframes:
+    - "5m"
+    - "1h"
+    - "4h"
+  storage:
+    type: "sqlite"
+    path: "data/market.db"
+
+training:
+  episodes: 1000
+  validation_split: 0.2
+  early_stopping_patience: 10
+
+risk:
+  max_drawdown: 0.10  # 10%
+  position_size: 0.1   # 10% du capital par trade
+  stop_loss: 0.02     # 2%
