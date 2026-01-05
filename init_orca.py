@@ -257,7 +257,7 @@ settings = Settings()
     run_cmd('git commit -m "Initial commit: Structure de base"')
     
     # Lier au repo distant
-    run_cmd("git remote add origin https://github.com/poyov/orca-trading.git")
+    run_cmd("git remote add origin https://github.com/poyov/orca.git")
     run_cmd("git branch -M main")
     
     print("\n" + "="*60)
@@ -265,7 +265,7 @@ settings = Settings()
     print("="*60)
     print("\nProchaines étapes:")
     print("1. Dans Spyder: Tools → Preferences → Python interpreter")
-    print("2. Sélectionner: /chemin/vers/orca-trading/venv/bin/python")
+    print("2. Sélectionner: /chemin/vers/orca/venv/bin/python")
     print("3. Redémarrer Spyder")
     print("4. Exécuter: import orca; orca.config.settings.show()")
     print("\nPour Git dans Spyder:")
