@@ -1,28 +1,42 @@
-```yaml
 project:
   name: "orca-trading"
   version: "0.1.0"
-  author: "Orca Team"
+  author: "poyov"
+  mode: "development"
 
 data:
   exchange: "binance"
   symbols:
     - "BTC/USDT"
-    - "ETH/USDT"
   timeframes:
     - "5m"
+    - "15m"
     - "1h"
-    - "4h"
   storage:
     type: "sqlite"
     path: "data/market.db"
+  limits:
+    max_days_history: 90  # Commence petit
+    update_frequency_minutes: 15
+
+features:
+  technical_indicators:
+    - "sma_20"
+    - "sma_50"
+    - "rsi_14"
+    - "bb_upper"
+    - "bb_lower"
+    - "volume_sma"
+
+environment:
+  initial_balance: 10000.0
+  commission: 0.001  # 0.1%
+  max_position_size: 0.1  # 10% du capital
 
 training:
-  episodes: 1000
+  episodes: 100
   validation_split: 0.2
-  early_stopping_patience: 10
 
-risk:
-  max_drawdown: 0.10  # 10%
-  position_size: 0.1   # 10% du capital par trade
-  stop_loss: 0.02     # 2%
+logging:
+  level: "INFO"
+  file: "logs/orca.log"
