@@ -18,6 +18,7 @@ data:
   limits:
     max_days_history: 90  # Commence petit
     update_frequency_minutes: 15
+  fetch_days: 30 #jours à fetch pour le début
 
 features:
   technical_indicators:

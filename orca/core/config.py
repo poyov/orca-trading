@@ -4,7 +4,7 @@ Core configuration for Orca Trading Bot.
 import yaml
 from pathlib import Path
 from dataclasses import dataclass
-from typing import List, Dict, Any
+from typing import List, Dict, Any, cast, Optional
 import logging
 
 # Setup logging
@@ -22,6 +22,7 @@ class DataConfig:
     exchange: str
     db_path: Path
     max_days_history: int = 90  # Start small
+    fetch_days: int = 30  
     
     def __post_init__(self):
         if isinstance(self.db_path, str):
@@ -47,36 +48,37 @@ class ModelConfig:
 class Config:
     """Main configuration class."""
     
-    def __init__(self, config_path: str = None):
+    def __init__(self, config_path: Optional[str] = None):
         self.project_root = Path(__file__).parent.parent.parent
         
-        if config_path is None:
-            config_path = self.project_root / "config" / "default.yaml"
+        config_file_path = self.project_root / "config" / "default.yaml" if config_path is None else Path(config_path)
         
-        self.config_path = Path(config_path)
+        self.config_path = config_file_path
         self._load_config()
         
         # Initialize sub-configs
         self.data = DataConfig(
-            symbols=self._get("data.symbols", ["BTC/USDT"]),
-            timeframes=self._get("data.timeframes", ["5m", "15m", "1h"]),
-            exchange=self._get("data.exchange", "binance"),
-            db_path=self.project_root / "data" / "processed" / "market.db"
+            symbols=cast(List[str], self._get("data.symbols", ["BTC/USDT"])),
+            timeframes=cast(List[str], self._get("data.timeframes", ["5m", "15m", "1h"])),
+            exchange=cast(str, self._get("data.exchange", "binance")),
+            db_path=self.project_root / "data" / "processed" / "market.db",
+            max_days_history=cast(int, self._get("data.limits.max_days_history", 90)),
+            fetch_days=cast(int, self._get("data.fetch_days", 30))  # ← Nouveau
         )
         
         self.trading = TradingConfig(
-            initial_balance=self._get("trading.initial_balance", 10000.0),
-            commission=self._get("trading.commission", 0.001),
-            max_position_size=self._get("trading.max_position_size", 0.1),
-            max_drawdown=self._get("trading.max_drawdown", 0.10),
-            stop_loss=self._get("trading.stop_loss", 0.02)
+            initial_balance=cast(float, self._get("trading.initial_balance", 10000.0)),
+            commission=cast(float, self._get("trading.commission", 0.001)),
+            max_position_size=cast(float, self._get("trading.max_position_size", 0.1)),
+            max_drawdown=cast(float, self._get("trading.max_drawdown", 0.10)),
+            stop_loss=cast(float, self._get("trading.stop_loss", 0.02))
         )
         
         self.model = ModelConfig(
-            training_episodes=self._get("model.training_episodes", 1000),
-            validation_split=self._get("model.validation_split", 0.2),
-            batch_size=self._get("model.batch_size", 32),
-            learning_rate=self._get("model.learning_rate", 0.001)
+            training_episodes=cast(int, self._get("model.training_episodes", 1000)),
+            validation_split=cast(float, self._get("model.validation_split", 0.2)),
+            batch_size=cast(int, self._get("model.batch_size", 32)),
+            learning_rate=cast(float, self._get("model.learning_rate", 0.001))
         )
         
         # Ensure directories exist

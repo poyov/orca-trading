@@ -1,7 +1,4 @@
-import sys
-sys.path.append('src')
-
-from data.fetcher import DataFetcher
+from orca.data.fetcher import DataFetcher
 
 if __name__ == "__main__":
     fetcher = DataFetcher()
