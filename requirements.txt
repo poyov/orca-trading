@@ -1,16 +1,10 @@
 # Core
-python>=3.9
-pip>=21.0
-
-# Data handling
 pandas>=2.0.0
 numpy>=1.24.0
 ccxt>=4.0.0
-
-# Technical indicators (lightweight)
 ta>=0.10.0
 
-# Machine Learning basics
+# ML Basics
 scikit-learn>=1.3.0
 gymnasium>=0.29.0
 
@@ -23,8 +17,3 @@ python-dotenv>=1.0.0
 loguru>=0.7.0
 tqdm>=4.65.0
 pyyaml>=6.0
-sqlite3>=3.35.0
-
-# Optional (for later)
-# torch>=2.0.0
-# stable-baselines3>=2.0.0

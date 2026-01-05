@@ -1,3 +1,6 @@
+# Spyder
+.spyproject/
+
 # Python
 __pycache__/
 *.py[cod]
@@ -9,8 +12,10 @@ venv/
 .env
 .venv/
 
+# Virtual Environment
+venv/
+
 # Database
-data/market.db
 *.db
 *.sqlite
 *.sqlite3
@@ -29,9 +34,11 @@ data/market.db
 Thumbs.db
 
 # Logs
-logs/*.log
+logs/
+*.log
 
-# Large data files (on ne stocke pas les CSV bruts)
+# Data (ne pas versionner)
 data/raw/
 *.csv
 *.parquet
+*.feather
